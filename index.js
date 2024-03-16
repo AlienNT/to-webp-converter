@@ -12,9 +12,9 @@ dotenv.config()
 
 const APP = new Express()
     .use(cors())
-    .use(apiConfig.API_ROUTE, routes)
     // .use(bodyParser.urlencoded({extended: true}))
     .use(bodyParser.json({limit: '20mb'}))
+    .use(apiConfig.API_ROUTE, routes)
 
 async function start() {
     try {

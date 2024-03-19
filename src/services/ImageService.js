@@ -42,6 +42,10 @@ class ImageService {
     async getMeta(buffer) {
         return await sharp(buffer).metadata()
     }
+
+    isImage(mimetype) {
+        return mimetype && mimetype.split('/')[0] === 'image'
+    }
 }
 
 export default new ImageService()

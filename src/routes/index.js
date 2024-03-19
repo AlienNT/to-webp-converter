@@ -2,14 +2,15 @@ import {Router} from "express";
 import multer from "multer";
 
 import ImageController from "../controllers/imageController.js";
+import {routeNames} from "../helpers/routeNames.js";
 
 const upload = multer()
 
 const router = new Router()
-    .post('/convert-single', upload.single('file'), ImageController.convertSingle)
-    .post('/convert-multiple', upload.single('files'), ImageController.convertMultiple)
+    .post(routeNames.CONVERT_SINGLE, upload.single('file'), ImageController.convertSingle)
+    .post(routeNames.CONVERT_MULTIPLE, upload.single('files'), ImageController.convertMultiple)
 
-    .get('/is-alive', (req, res) => {
+    .get(routeNames.IS_ALIVE, (req, res) => {
         res.json({status: 200, message: 'server online'})
     })
 export default router

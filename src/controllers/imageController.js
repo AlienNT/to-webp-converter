@@ -4,7 +4,16 @@ class ImageController {
     async convertSingle(req, res) {
         try {
             const {uuid} = req.body
-            const {originalname, buffer} = req.file
+            const {file} = req
+
+            if (!file) {
+                return res.status(400).json({errors: ['file not send']})
+            }
+            const {originalname, buffer, mimetype} = req.file
+
+            if (!ImageService.isImage(mimetype)) {
+                return res.status(400).json({errors: ['unsupported file type: ' + mimetype]})
+            }
 
             const convertedImage = await ImageService.convertToWebp({
                 image: buffer,
